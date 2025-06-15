@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Оценка стоимости квартиры в Москве</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+<h2>Введите параметры квартиры</h2>
+
+    <form method="post">
+        <div class="form-grid">
+           <div>
+                <label>Площадь (кв.м):</label>
+                <input type="number" name="Area" min="10" max="500" step="0.1" required>
+            </div>
+
+            <div>
+                <label>Жилая площадь (кв.м):</label>
+                <input type="number" name="Living area" min="8" max="400" step="0.1" required>
+            </div>
+
+            <div>
+                <label>Количество комнат:</label>
+                <input type="number" name="Number of rooms" min="1" max="10" required>
+            </div>
+
+            <div>
+                <label>Этаж:</label>
+                <input type="number" name="Floor" min="1" max="100" required>
+            </div>
+
+            <div>
+                <label>Этажей в доме:</label>
+                <input type="number" name="Number of floors" min="1" max="100" required>
+            </div>
+
+            <div>
+                <label>Путь до метро (в минутах):</label>
+                <input type="number" name="Minutes to metro" min="0" max="60" required>
+            </div>
+
+            <div>
+                <label>Район:</label>
+                <select name="Region" required>
+                    {% for region in regions %}
+                        <option value="{{ region }}">{{ region }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label>Станция метро:</label>
+                <select name="Metro station" required>
+                    {% for station in stations %}
+                        <option value="{{ station }}">{{ station }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label>Ремонт:</label>
+                <select name="Renovation" required>
+                    {% for r in renovations %}
+                        <option value="{{ r }}">{{ r }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label>Тип дома:</label>
+                <select name="Apartment type" required>
+                    {% for t in apartment_types %}
+                        <option value="{{ t }}">{{ t }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <input type="submit" value="Рассчитать цену">
+        </div>
+    </form>
+
+    {% if prediction %}
+        <h3>Оценочная стоимость: {{ prediction }} ₽</h3>
+    {% endif %}
+    <script src="../static/js/validation.js"></script>
+</body>
+</html>
